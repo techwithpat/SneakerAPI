@@ -24,17 +24,8 @@ namespace SneakerAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Sneaker sneaker)
         {
-            try
-            {
-                await _sneakerRepository.Create(sneaker);
-                return StatusCode(201);
-            }
-            catch (System.Exception e)
-            {
-
-                return BadRequest();
-            }
-           
+            await _sneakerRepository.Create(sneaker);
+            return StatusCode(201);
         }
     }
 }
