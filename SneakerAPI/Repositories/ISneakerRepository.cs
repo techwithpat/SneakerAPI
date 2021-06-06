@@ -8,6 +8,5 @@ namespace SneakerAPI.Repositories
     {
         IEnumerable<Sneaker> GetAll();
         Task Create(Sneaker sneaker);
-        Task Delete(Sneaker sneaker);
     }
 }

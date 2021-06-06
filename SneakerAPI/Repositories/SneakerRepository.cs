@@ -1,4 +1,5 @@
 ﻿using SneakerAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,13 +21,8 @@ namespace SneakerAPI.Repositories
 
         public Task Create(Sneaker sneaker)
         {
-            _sneakerContext.Set<Sneaker>().Add(sneaker);
-            return _sneakerContext.SaveChangesAsync();
-        }
-
-        public Task Delete(Sneaker sneaker)
-        {
-            _sneakerContext.Set<Sneaker>().Remove(sneaker);
+            sneaker.Id = Guid.NewGuid();
+            _sneakerContext.Set<Sneaker>().AddAsync(sneaker);
             return _sneakerContext.SaveChangesAsync();
         }
     }

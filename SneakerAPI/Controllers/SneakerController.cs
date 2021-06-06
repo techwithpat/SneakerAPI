@@ -2,6 +2,7 @@
 using SneakerAPI.Models;
 using SneakerAPI.Repositories;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SneakerAPI.Controllers
 {
@@ -21,10 +22,19 @@ namespace SneakerAPI.Controllers
         }
                
         [HttpPost]
-        public IActionResult Post([FromBody] Sneaker sneaker)
+        public async Task<IActionResult> Post([FromBody] Sneaker sneaker)
         {
-            _sneakerRepository.Create(sneaker);
-            return StatusCode(201);
+            try
+            {
+                await _sneakerRepository.Create(sneaker);
+                return StatusCode(201);
+            }
+            catch (System.Exception e)
+            {
+
+                return BadRequest();
+            }
+           
         }
     }
 }
