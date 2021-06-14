@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SneakerAPI.Repositories
+namespace SneakerAPI.Services
 {
-    public interface ISneakerRepository
+    public interface ISneakerService
     {
         IEnumerable<Sneaker> GetAll();
         Task Create(Sneaker sneaker);

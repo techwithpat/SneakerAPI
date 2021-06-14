@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace SneakerAPI.Repositories
+namespace SneakerAPI.Services
 {
-    public class SneakerRepository : ISneakerRepository
+    public class SneakerService : ISneakerService
     {
         private readonly SneakerContext _sneakerContext;
 
-        public SneakerRepository(SneakerContext sneakerContext)
+        public SneakerService(SneakerContext sneakerContext)
         {
             _sneakerContext = sneakerContext;
         }

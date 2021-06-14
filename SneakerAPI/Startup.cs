@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using SneakerAPI.Db;
 using SneakerAPI.Extensions;
 
 namespace SneakerAPI
@@ -20,7 +21,7 @@ namespace SneakerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureSqlContext(Configuration);
-            services.ConfigureRepositories();
+            services.ConfigureServices();
             services.AddControllers();
         }
 

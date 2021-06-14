@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SneakerAPI.Models;
-using SneakerAPI.Repositories;
+using SneakerAPI.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,9 +10,9 @@ namespace SneakerAPI.Controllers
     [ApiController]
     public class SneakerController : ControllerBase
     {
-        private readonly ISneakerRepository _sneakerRepository;
+        private readonly ISneakerService _sneakerRepository;
 
-        public SneakerController(ISneakerRepository sneakerRepository) 
+        public SneakerController(ISneakerService sneakerRepository) 
             => _sneakerRepository = sneakerRepository;
 
         [HttpGet]
