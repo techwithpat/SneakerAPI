@@ -23,6 +23,7 @@ namespace SneakerAPI
             services.ConfigureSqlContext(Configuration);
             services.AddAuthentication();
             services.ConfigureIdentity();
+            services.ConfigureJwt(Configuration);
             services.ConfigureServices();
             services.AddControllers();
         }
@@ -34,6 +35,9 @@ namespace SneakerAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseHttpsRedirection();
 

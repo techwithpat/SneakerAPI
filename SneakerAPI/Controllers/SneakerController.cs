@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SneakerAPI.Models;
 using SneakerAPI.Services;
 using System.Collections.Generic;
@@ -15,13 +16,13 @@ namespace SneakerAPI.Controllers
         public SneakerController(ISneakerService sneakerRepository) 
             => _sneakerService = sneakerRepository;
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public IEnumerable<Sneaker> Get()
         {
             return _sneakerService.GetAll();
         }
                
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "admin")]
         public async Task<IActionResult> Post([FromBody] Sneaker sneaker)
         {
             await _sneakerService.Create(sneaker);

@@ -24,7 +24,7 @@ namespace SneakerAPI.Controllers
             if (!await _authenticationManager.ValidateCredentials(credentials))
                 return Unauthorized();
 
-            return Ok(new {  Message = "Succeed" });
+            return Ok(new {  Token = await _authenticationManager.CreateToken() });
         }
     }
 }
