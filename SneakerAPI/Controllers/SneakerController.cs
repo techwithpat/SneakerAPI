@@ -10,21 +10,21 @@ namespace SneakerAPI.Controllers
     [ApiController]
     public class SneakerController : ControllerBase
     {
-        private readonly ISneakerService _sneakerRepository;
+        private readonly ISneakerService _sneakerService;
 
         public SneakerController(ISneakerService sneakerRepository) 
-            => _sneakerRepository = sneakerRepository;
+            => _sneakerService = sneakerRepository;
 
         [HttpGet]
         public IEnumerable<Sneaker> Get()
         {
-            return _sneakerRepository.GetAll();
+            return _sneakerService.GetAll();
         }
                
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Sneaker sneaker)
         {
-            await _sneakerRepository.Create(sneaker);
+            await _sneakerService.Create(sneaker);
             return StatusCode(201);
         }
     }

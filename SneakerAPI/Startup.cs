@@ -21,6 +21,8 @@ namespace SneakerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.ConfigureSqlContext(Configuration);
+            services.AddAuthentication();
+            services.ConfigureIdentity();
             services.ConfigureServices();
             services.AddControllers();
         }

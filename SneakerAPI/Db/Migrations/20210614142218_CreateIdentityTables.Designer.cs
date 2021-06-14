@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SneakerAPI.Db;
 
 namespace SneakerAPI.Db.Migrations
 {
     [DbContext(typeof(SneakerContext))]
-    partial class SneakerContextModelSnapshot : ModelSnapshot
+    [Migration("20210614142218_CreateIdentityTables")]
+    partial class CreateIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,22 +46,6 @@ namespace SneakerAPI.Db.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "admin_role",
-                            ConcurrencyStamp = "5439e5ab-23c8-4bea-a500-781d9278f4b2",
-                            Name = "admin",
-                            NormalizedName = "ADMIN"
-                        },
-                        new
-                        {
-                            Id = "reader_role",
-                            ConcurrencyStamp = "92aa41b8-42aa-43a8-a4f0-f60b723c1945",
-                            Name = "reader",
-                            NormalizedName = "READER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -149,37 +135,6 @@ namespace SneakerAPI.Db.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "029976c6-5457-488c-ad46-675e626ef00d",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "8d2cdf48-ea98-4aab-8f42-b2ddafd47a4e",
-                            Email = "admin@gmail.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGCCZ/XH4RgobZKC0O0mZd44T1SjyHdWPrkNtuUGt2OIfTSnsmjq/AqxW6pMSeSpbg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "5ad0dc33-9fbd-4399-a4de-ad931d6a1b8a",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@gmail.com"
-                        },
-                        new
-                        {
-                            Id = "0cb46b1c-3452-4194-ae9d-1b086c135017",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "82dcf9c4-0ca3-4e08-b831-43075bbf8da3",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            NormalizedUserName = "READER@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEErH+miEGhdfWzo96mjrOZyGs0DPric2ySA46BbuHPhUzidoMvEJqLUD8nl91HBwdA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "a27b4a90-212f-403e-a63c-bb913bd6a904",
-                            TwoFactorEnabled = false,
-                            UserName = "reader@gmail.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -241,18 +196,6 @@ namespace SneakerAPI.Db.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = "029976c6-5457-488c-ad46-675e626ef00d",
-                            RoleId = "admin_role"
-                        },
-                        new
-                        {
-                            UserId = "0cb46b1c-3452-4194-ae9d-1b086c135017",
-                            RoleId = "reader_role"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -302,7 +245,7 @@ namespace SneakerAPI.Db.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0e3e7912-46c7-43f0-b2bd-952869c1b61e"),
+                            Id = new Guid("c2f19056-d96a-496d-a7bd-a4bfc979d8e1"),
                             Brand = "Nike",
                             ColorWay = "White",
                             Description = "Perhaps the most iconic Nike sneaker of all-time.",
@@ -311,7 +254,7 @@ namespace SneakerAPI.Db.Migrations
                         },
                         new
                         {
-                            Id = new Guid("45556667-fbb5-49c6-b50a-9db11629411f"),
+                            Id = new Guid("506f5ebb-3704-46ac-a60e-de158f326657"),
                             Brand = "Adidas ",
                             ColorWay = "White",
                             Description = "The adidas Stan Smith tennis shoe design debuted in 1963 as the adidas Robert Haillet.",
