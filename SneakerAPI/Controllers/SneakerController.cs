@@ -17,11 +17,8 @@ namespace SneakerAPI.Controllers
             => _sneakerService = sneakerRepository;
 
         [HttpGet, Authorize]
-        public IEnumerable<Sneaker> Get()
-        {
-            return _sneakerService.GetAll();
-        }
-               
+        public IEnumerable<Sneaker> Get() => _sneakerService.GetAll();
+
         [HttpPost, Authorize(Roles = "admin")]
         public async Task<IActionResult> Post([FromBody] Sneaker sneaker)
         {

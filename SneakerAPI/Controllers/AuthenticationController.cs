@@ -11,20 +11,17 @@ namespace SneakerAPI.Controllers
     {
         private readonly IAuthenticationManager _authenticationManager;
 
-        public AuthenticationController(IAuthenticationManager authenticationManager)
-        {
-            _authenticationManager = authenticationManager;
-        }
+        public AuthenticationController(IAuthenticationManager authenticationManager) 
+            => _authenticationManager = authenticationManager;
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] AuthCredentials credentials)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            if (!await _authenticationManager.ValidateCredentials(credentials))
-                return Unauthorized();
-
-            return Ok(new {  Token = await _authenticationManager.CreateToken() });
+            return !await _authenticationManager.ValidateCredentials(credentials)
+                ? Unauthorized()
+                : Ok(new {  Token = await _authenticationManager.CreateToken() });
         }
     }
 }
