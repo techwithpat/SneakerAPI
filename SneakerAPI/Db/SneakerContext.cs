@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using SneakerAPI.Models;
 
 namespace SneakerAPI.Db
 {
-    public class SneakerContext : IdentityDbContext
+    public class SneakerContext : DbContext
     {
         public SneakerContext(DbContextOptions<SneakerContext> options)
             :base(options)

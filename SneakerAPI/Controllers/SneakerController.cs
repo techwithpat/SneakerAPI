@@ -13,8 +13,8 @@ namespace SneakerAPI.Controllers
     {
         private readonly ISneakerService _sneakerService;
 
-        public SneakerController(ISneakerService sneakerRepository) 
-            => _sneakerService = sneakerRepository;
+        public SneakerController(ISneakerService sneakerService) 
+            => _sneakerService = sneakerService;
 
         [HttpGet, Authorize]
         public IEnumerable<Sneaker> Get() => _sneakerService.GetAll();
