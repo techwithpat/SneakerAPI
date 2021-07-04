@@ -31,42 +31,34 @@ namespace SneakerAPI.Services
 
         public async Task<string> CreateToken()
         {
-            var signingCredentials = GetSigningCredentials(); 
-            var claims = await GetClaims(); 
-            var tokenOptions = GenerateTokenOptions(signingCredentials, claims); 
+            var jwtsettings = _configuration.GetSection("JwtSettings");
 
-            return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-        }
+            var claims = await GetClaims();
 
-        private SigningCredentials GetSigningCredentials()
-        {
-            var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET")); 
-            var secret = new SymmetricSecurityKey(key); 
-            return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtsettings.GetSection("secret").Value));
+            var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: jwtsettings.GetSection("validIssuer").Value,
+                audience: jwtsettings.GetSection("validAudience").Value,
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: signingCredentials);
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
         private async Task<List<Claim>> GetClaims()
         {
-            var claims = new List<Claim> 
-            { new Claim(ClaimTypes.Name, _user.UserName) }; 
-            
-            var roles = await _userManager.GetRolesAsync(_user); 
-            foreach (var role in roles) 
-            { 
-                claims.Add(new Claim(ClaimTypes.Role, role)); 
+            var claims = new List<Claim>
+            { new Claim(ClaimTypes.Name, _user.UserName) };
+
+            var roles = await _userManager.GetRolesAsync(_user);
+            foreach (var role in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
             }
             return claims;
-        }
-
-        private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, List<Claim> claims)
-        {
-            var jwtSettings = _configuration.GetSection("JwtSettings"); 
-            var tokenOptions = new JwtSecurityToken(issuer: jwtSettings.GetSection("validIssuer").Value,
-                                                    audience: jwtSettings.GetSection("validAudience").Value,
-                                                    claims: claims,
-                                                    expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings.GetSection("expires").Value)),
-                                                    signingCredentials: signingCredentials); 
-            return tokenOptions;
         }
     }
 }
