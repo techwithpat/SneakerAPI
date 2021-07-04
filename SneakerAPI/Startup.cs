@@ -36,7 +36,6 @@ namespace SneakerAPI
                 app.UseDeveloperExceptionPage();
             }
 
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
