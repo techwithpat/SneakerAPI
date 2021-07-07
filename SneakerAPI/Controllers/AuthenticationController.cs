@@ -16,7 +16,14 @@ namespace SneakerAPI.Controllers
             _authenticationManager = authenticationService;
         }
 
+        /// <summary>
+        /// Request a token
+        /// </summary>
+        /// <param name="credentials"></param>
+        /// <returns></returns>
         [HttpPost("login")]
+        [ApiConventionMethod(typeof(DefaultApiConventions),
+            nameof(DefaultApiConventions.Post))]
         public async Task<IActionResult> Login([FromBody] AuthCredentials credentials)
         {
             if(!ModelState.IsValid)            
