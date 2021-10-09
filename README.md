@@ -1,4 +1,4 @@
-# SneakerAPI
+#  JWT (Json Web Token) with ASP.NET Core Web API.
 
 
 This code base demonstrated usage of JWT (Json Web Token) with ASP.NET Core Web API. 
